@@ -12,5 +12,3 @@ that bring stories to life.
 Commission Open
 
 View Portfolio
-
-We’re so sorry, but the image we created may violate our content policies. If you think we got it wrong, please retry or edit your prompt.
