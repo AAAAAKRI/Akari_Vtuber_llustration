@@ -1,0 +1,46 @@
+
+
+                setTimeout(() => closeHint.classList.add('opacity-100'), 100);
+            }
+        };
+
+        const hidePreview = () => {
+            modal.classList.remove('opacity-100', 'z-50', 'pointer-events-auto');
+            modal.classList.add('opacity-0', '-z-10');
+            previewImg.classList.remove('scale-100');
+            previewImg.classList.add('scale-95');
+            
+            if(isTouchDevice) {
+                modal.classList.add('pointer-events-none');
+                closeHint.classList.remove('opacity-100');
+                setTimeout(() => closeHint.classList.add('hidden'), 300);
+            }
+        };
+
+        works.forEach((work, index) => {
+            const card = document.createElement('div');
+            card.className = "group relative cursor-pointer rounded-xl md:rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-2xl hover:shadow-gold/20 transition-all duration-300 transform hover:-translate-y-1 md:hover:-translate-y-2 border border-gray-100";
+            
+            card.innerHTML = `
+                <div class="aspect-square w-full overflow-hidden bg-[#f8f9fa]">
+                    <img src="${work.thumb}" alt="Vtuber Portfolio ${index + 1}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" loading="lazy" />
+                </div>
+                <div class="absolute inset-1 md:inset-2 border border-gold opacity-0 group-hover:opacity-100 rounded-lg md:rounded-xl transition-opacity duration-300 pointer-events-none"></div>
+            `;
+
+            if (!isTouchDevice) {
+                card.addEventListener('mouseenter', () => showPreview(work.full));
+                card.addEventListener('mouseleave', hidePreview);
+            } else {
+                card.addEventListener('click', () => showPreview(work.full));
+            }
+
+            gridContainer.appendChild(card);
+        });
+
+        if (isTouchDevice) {
+            modal.addEventListener('click', hidePreview);
+        }
+    </script>
+</body>
+</html>
